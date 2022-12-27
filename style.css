@@ -1,0 +1,21 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    background-image: url(bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.word{
+    font-size: 2rem;
+    margin-bottom:  1.5rem;
+    color: white;
+}
+.hidden{
+    display: none;
+}
+.title{
+    margin: auto;
+    font-size: 2rem;
+}
+.container{
+    margin-bottom: 2rem;
+}
