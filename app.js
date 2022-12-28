@@ -1,4 +1,4 @@
-const meainingsElement = document.querySelector('.meanings')
+const meaningsElement = document.querySelector('.meanings')
 const wordElement = document.querySelector('.word')
 const wordInputElement = document.querySelector('.word-input')
 const searchBtn = document.querySelector('.search-btn')
@@ -8,36 +8,42 @@ const options = {
 	method: 'GET',
 	headers: {
 		'X-RapidAPI-Key': '61c3215823msh1ce21b5e6bce66ap117f52jsn985a699a8370',
-		'X-RapidAPI-Host': 'mashape-community-urban-dictionary.p.rapidapi.com'
+		'X-RapidAPI-Host': 'dictionary-by-api-ninjas.p.rapidapi.com'
 	}
 };
 
 
 function getMeaning(word){
 
-	fetch(`https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${word}`, options)
+	fetch(`https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary?word=${word}`, options)
 		.then(response => response.json())
 		.then(response => {
-			console.log(response.list.length)
-			if (!response.list.length){
+			// console.log(Object.keys(response).length)
+			// console.log(response)
+			if (!response.valid){
 				alert("No Results Found!")
 			}
-			const definitions = response.list
-			let meainings = new Array();
-			for (let i= 0 ; i < definitions.length; i++){
-				console.log(definitions[i].definition)
-				meainings.push(definitions[i].definition)
+			const meanings = response.definition.split(/[0-9]. /)
+			for (let i = 0 ; i < meanings.length; i++){
+				if (meanings[i] == ""){
+					meanings.splice(i, 1)
+				}
 			}
-			// console.log(meainings)
+			// console.log(meanings.length)
+			// for (let i = 0 ; i < meanings.length; i++){
+			// 	console.log(`${i+1} : ${meanings[i]}`)
+			// }
+
+			// console.log(meanings)
 			
-			for (let i = 0 ; i < meainings.length; i++){
+			for (let i = 0 ; i < meanings.length; i++){
 				const m = document.createElement("li")
 				m.classList.add("list-group-item")
 				m.classList.add("d-flex")
 				m.classList.add("justify-content-between")
 				m.classList.add("align-items-center")
-				m.innerHTML = meainings[i]
-				meainingsElement.appendChild(m)
+				m.innerHTML = meanings[i]
+				meaningsElement.appendChild(m)
 			}
 		})
 		.catch(err => console.error(err));

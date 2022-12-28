@@ -3,6 +3,7 @@ body{
     background-image: url(bg.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    height: fit-content;
 }
 .word{
     font-size: 2rem;
