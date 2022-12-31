@@ -1,9 +1,14 @@
 body{
     font-family: 'Poppins', sans-serif;
     background-image: url(bg.jpg);
-    background-size: cover;
+    background-size: 100vw 100vh;
     background-repeat: no-repeat;
-    height: fit-content;
+}
+@media (min-width: 800px){
+    body{
+        /* Your styling goes here */
+        background-size: 100vw 100vh;
+    }
 }
 .word{
     font-size: 2rem;
