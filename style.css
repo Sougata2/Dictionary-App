@@ -1,8 +1,9 @@
 body{
     font-family: 'Poppins', sans-serif;
-    background-image: url(bg.jpg);
-    background-size: 100vw 100vh;
-    background-repeat: no-repeat;
+    background: #a8ff78;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #78ffd6, #a8ff78);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #78ffd6, #a8ff78); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 @media (min-width: 800px){
     body{
@@ -13,7 +14,6 @@ body{
 .word{
     font-size: 2rem;
     margin-bottom:  1.5rem;
-    color: white;
 }
 .hidden{
     display: none;
