@@ -22,5 +22,6 @@ body{
 }
 .list-overflow{
     overflow: scroll;
+    overflow-x: hidden;
     height: 17rem;
 }
