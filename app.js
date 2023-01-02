@@ -2,6 +2,7 @@ const meaningsElement = document.querySelector('.meanings')
 const wordElement = document.querySelector('.word')
 const wordInputElement = document.querySelector('.word-input')
 const searchBtn = document.querySelector('.search-btn')
+const loaderBtn = document.querySelector('.loader-btn')
 
 
 const options = {
@@ -12,14 +13,24 @@ const options = {
 	}
 };
 
+function showLoader(){
+	searchBtn.classList.add('hidden')
+	loaderBtn.classList.remove('hidden')
+}
+
+function hideLoader(){
+	searchBtn.classList.remove('hidden')
+	loaderBtn.classList.add('hidden')
+}
 
 function getMeaning(word){
-
+	showLoader()
 	fetch(`https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary?word=${word}`, options)
 		.then(response => response.json())
 		.then(response => {
 			// console.log(Object.keys(response).length)
 			// console.log(response)
+			hideLoader()
 			if (!response.valid){
 				alert("No Results Found!")
 			}
