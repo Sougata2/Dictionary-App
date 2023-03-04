@@ -1,14 +1,13 @@
 body{
     font-family: 'Poppins', sans-serif;
-    background-image: url(bg.jpg);
+    /* background-image: url(bg.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100vh; */
 }
 .word{
     font-size: 2rem;
     margin-bottom:  1rem;
-    color: white;
 }
 .hidden{
     display: none;
