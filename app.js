@@ -58,7 +58,6 @@ function getMeaning(meaningObject) {
   console.log(word);
   console.log(meanings);
   displayWord(word);
-  loadingAnimation(false);
   displayMeaning(meanings);
 }
 
@@ -71,6 +70,7 @@ function displayError(errorMessage) {
 // For getting thesaurus
 function getThesaurus(thesaurusObject) {
   console.log(thesaurusObject);
+  loadingAnimation(false);
   thesaurusElement.innerHTML = '';
   const { synonyms, antonyms } = thesaurusObject;
   const synonymsText =
