@@ -27,27 +27,8 @@ const getMeaningResponse = function (word) {
         displayError(response.message);
       } else {
         getMeaning(response);
-        getThesaurusResponse(word);
+        getThesaurus(getSynonymsAntonyms(response));
       }
-    });
-};
-// Fetch Thesaurus
-const getThesaurusResponse = function (word) {
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "61c3215823msh1ce21b5e6bce66ap117f52jsn985a699a8370",
-      "X-RapidAPI-Host": "thesaurus-by-api-ninjas.p.rapidapi.com",
-    },
-  };
-
-  fetch(
-    `https://thesaurus-by-api-ninjas.p.rapidapi.com/v1/thesaurus?word=${word}`,
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => {
-      getThesaurus(response);
     });
 };
 //////////////////////////////////////////////////////
@@ -67,16 +48,32 @@ function displayError(errorMessage) {
   alert(errorMessage + "🤔");
 }
 
+const getSynonymsAntonyms = function (response) {
+  console.log(response);
+  const [{ meanings }] = response;
+  let syno = [],
+    anto = [];
+  console.log("Response", meanings);
+  meanings.forEach((meaning) => {
+    const { synonyms, antonyms } = meaning;
+    syno.push(synonyms);
+    anto.push(antonyms);
+  });
+  return [syno.flat(), anto.flat()];
+};
+
 // For getting thesaurus
 function getThesaurus(thesaurusObject) {
   console.log(thesaurusObject);
   loadingAnimation(false);
-  thesaurusElement.innerHTML = '';
-  const { synonyms, antonyms } = thesaurusObject;
+  thesaurusElement.innerHTML = "";
+  const [synonyms, antonyms] = thesaurusObject;
   const synonymsText =
-    synonyms.length > 0 ? `<span style="color: #188038">Similar: </span>` : ``;
+    synonyms.length > 0 ? `<span style="color: #188038">Similar:  </span>` : ``;
   const antonymsText =
-    antonyms.length > 0 ? `<span style="color: #d93025">Opposite: </span>` : ``;
+    antonyms.length > 0
+      ? `<span style="color: #d93025">Opposite:  </span>`
+      : ``;
   thesaurusElement.insertAdjacentHTML("beforeend", synonymsText);
   synonyms.forEach(function (synonym, i) {
     const synonymsHTML = `
@@ -97,7 +94,7 @@ function getThesaurus(thesaurusObject) {
 
   thesaurusElement.insertAdjacentHTML("beforeend", `<br>`);
   thesaurusElement.insertAdjacentHTML("beforeend", antonymsText);
-  antonyms.forEach(function(antonym, i){
+  antonyms.forEach(function (antonym, i) {
     const antonymsHTML = `
     <button
       class="opposite-words btn btn-outline-light"
@@ -111,7 +108,7 @@ function getThesaurus(thesaurusObject) {
       ${antonym}
     </button>
     `;
-    thesaurusElement.insertAdjacentHTML('beforeend', antonymsHTML);
+    thesaurusElement.insertAdjacentHTML("beforeend", antonymsHTML);
   });
 }
 
